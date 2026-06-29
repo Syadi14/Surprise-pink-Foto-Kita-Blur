@@ -155,7 +155,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     // 3. LOGIKA INTERAKSI SURAT CINTA
-    const fullText = "Kamu adalah blueberry yang membawa kemanisan, dan aku adalah pastry yang menjadi dasarnya. Kita adalah perpaduan rasa yang saling melengkapi dan menyeimbangkan. Saking lucunya, aku bahkan bermimpi ingin membangun sebuah toko roti kecil, menyatukan nama depanmu dan nama belakangku di pintunya.";
+    // Cukup ganti baris variabel fullText lama dengan kode di bawah ini:
+    const fullText = `<strong><span class="name-highlight">Zulfah</span></strong> sebagai blueberry yang membawa kemanisan, dan <strong><span class="name-highlight">Syadi</span></strong> sebagai pastry yang menjadi dasarnya. Perpaduan rasa yang saling melengkapi dan menyeimbangkan.<br><br>Saking lucunya, aku bahkan bermimpi ingin membangun sebuah toko roti kecil, menyatukan nama depanmu <strong><span class="name-highlight">"Zulfah"</span></strong> dan nama belakangku <strong><span class="name-highlight">"Hafidz"</span></strong> di pintunya.<br><br><div class="bakery-logo">✨ Z & H Bakery ✨</div>`;
     let textIndex = 0;
 
     envelope.addEventListener("click", () => {
@@ -178,12 +179,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function typeWriterEffect() {
         if (textIndex < fullText.length) {
-            document.getElementById("typewriter-text").innerHTML += fullText.charAt(textIndex);
-            textIndex++;
-            // Durasi ketikan disesuaikan agar terasa tenang (55ms per karakter)
-            setTimeout(typeWriterEffect, 55);
+            // Jika karakter saat ini adalah bagian dari tag HTML, ketik sekaligus hingga tag selesai
+            if (fullText.charAt(textIndex) === '<') {
+                let tagLength = fullText.substring(textIndex).indexOf('>') + 1;
+                document.getElementById("typewriter-text").innerHTML += fullText.substring(textIndex, textIndex + tagLength);
+                textIndex += tagLength;
+            } else {
+                document.getElementById("typewriter-text").innerHTML += fullText.charAt(textIndex);
+                textIndex++;
+            }
+            setTimeout(typeWriterEffect, 40); // Kecepatan mengetik sedikit dipercepat agar nyaman dibaca
         } else {
-            // Setelah selesai mengetik, munculkan penutup & ledakan partikel ekstra
+            // Setelah selesai mengetik, munculkan penutup & ledakan partikel
             setTimeout(() => {
                 letterFooter.classList.remove("hidden-element");
                 letterFooter.classList.add("show-element");
@@ -191,7 +198,6 @@ document.addEventListener("DOMContentLoaded", () => {
             }, 1000);
         }
     }
-
     // Efek Tambahan: Ledakan partikel kecil saat surat selesai diketik
     function triggerSparkleBurst() {
         for (let i = 0; i < 30; i++) {

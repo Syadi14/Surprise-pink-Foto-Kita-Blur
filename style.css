@@ -296,3 +296,36 @@ section.hidden {
     .envelope-box { width: 250px; height: 160px; }
     .envelope-flap { border-left: 125px solid transparent; border-right: 125px solid transparent; border-top: 80px solid var(--pink-pastel); }
 }
+
+/* ================= HIASAN ROMANTIS SURAT BARU ================= */
+.name-highlight {
+    color: #E07A9B; /* Warna pink pastel gelap yang romantis */
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    text-shadow: 0 0 10px rgba(255, 193, 214, 0.4);
+}
+
+.bakery-logo {
+    font-family: 'Dancing Script', cursive;
+    font-size: 2.2rem;
+    color: #D4A373; /* Warna cream keemasan yang hangat */
+    text-align: center;
+    margin-top: 20px;
+    font-weight: bold;
+    animation: floatingText 4s ease-in-out infinite;
+    letter-spacing: 2px;
+}
+
+/* Menambahkan watermark inisial Z & H transparan di latar belakang kertas surat */
+.letter-box::before {
+    content: "Z & H";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: 'Dancing Script', cursive;
+    font-size: 8rem;
+    color: rgba(255, 193, 214, 0.08); /* Sangat samar dan elegan */
+    z-index: -1;
+    pointer-events: none;
+}
