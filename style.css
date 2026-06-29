@@ -1,0 +1,298 @@
+/* ================= VARIABLES & RESET ================= */
+:root {
+    --bg-color: #FFF8FC;
+    --pink-pastel: #FFC1D6;
+    --cream-color: #FFF3E9;
+    --white: #FFFFFF;
+    --text-dark: #4A3E4D;
+    --text-muted: #8B7E8F;
+    --shadow-soft: rgba(255, 193, 214, 0.3);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Quicksand', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-dark);
+    overflow: hidden;
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    perspective: 1000px;
+}
+
+/* Canvas Latar Belakang */
+#particleCanvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    pointer-events: none;
+}
+
+/* Sections Control */
+section {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2;
+    transition: opacity 2.5s ease, filter 2.5s ease, transform 2.5s ease;
+    opacity: 0;
+    pointer-events: none;
+}
+
+section.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+section.hidden {
+    opacity: 0;
+    filter: blur(10px);
+    transform: scale(0.95);
+    pointer-events: none;
+}
+
+/* ================= HALAMAN 1 ================= */
+.intro-container {
+    text-align: center;
+    padding: 20px;
+}
+
+.question-text {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    font-style: italic;
+    font-weight: 400;
+    margin-bottom: 30px;
+    letter-spacing: 1px;
+    animation: floatingText 4s ease-in-out infinite;
+}
+
+.btn-primary {
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 600;
+    font-size: 1.1rem;
+    padding: 12px 40px;
+    background-color: var(--white);
+    color: var(--text-dark);
+    border: 1px solid var(--pink-pastel);
+    border-radius: 30px;
+    cursor: pointer;
+    box-shadow: 0 8px 20px var(--shadow-soft);
+    transition: all 0.5s ease;
+    animation: pulseHeart 2s infinite;
+}
+
+.btn-primary:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 12px 25px rgba(255, 193, 214, 0.6);
+    background-color: var(--pink-pastel);
+    color: white;
+}
+
+/* ================= HALAMAN 2: LIRIK ================= */
+.lyrics-container {
+    text-align: center;
+    width: 85%;
+    max-width: 800px;
+}
+
+.lyric-text {
+    transition: all 2s ease;
+    line-height: 1.6;
+}
+
+.lyric-small {
+    font-family: 'Quicksand', sans-serif;
+    font-size: 1.2rem;
+    color: var(--text-muted);
+    font-style: italic;
+    animation: floatingText 5s ease-in-out infinite;
+}
+
+.lyric-huge {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.8rem;
+    font-weight: 600;
+    text-shadow: 0 0 20px rgba(255,255,255,0.8), 0 0 30px var(--pink-pastel);
+    animation: floatingText 4s ease-in-out infinite;
+}
+
+.lyric-dramatic {
+    font-family: 'Dancing Script', cursive;
+    font-size: 3rem;
+    color: var(--text-dark);
+    animation: dramaticScale 6s ease-in-out infinite;
+}
+
+.highlight-pink { color: #E07A9B; }
+.highlight-cream { color: #D4A373; }
+
+.hidden-element {
+    opacity: 0;
+    filter: blur(8px);
+    transform: scale(0.9) translateY(10px);
+}
+
+.show-element {
+    opacity: 1;
+    filter: blur(0);
+    transform: scale(1) translateY(0);
+}
+
+/* ================= HALAMAN 3: AMPLOP & SURAT ================= */
+.envelope-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 500px;
+    padding: 20px;
+    transition: transform 2s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* Efek Kamera Zoom In ketika surat terbuka */
+.zoom-in-camera {
+    transform: scale(1.06);
+}
+
+/* Desain Kasar Kotak Amplop (bisa ditimpa background image assets/) */
+.envelope-box {
+    width: 280px;
+    height: 180px;
+    background-color: var(--cream-color);
+    border-radius: 8px;
+    position: relative;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05), 0 1px 3px rgba(0, 0, 0, 0.02);
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.5s ease;
+    animation: floatingText 4s ease-in-out infinite;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+.envelope-box:hover {
+    transform: translateY(-5px) scale(1.03);
+    box-shadow: 0 15px 35px var(--shadow-soft);
+    background-color: #FFF0E2;
+}
+
+.envelope-flap {
+    position: absolute;
+    top: 0;
+    width: 0;
+    height: 0;
+    border-left: 140px solid transparent;
+    border-right: 140px solid transparent;
+    border-top: 90px solid var(--pink-pastel);
+    border-radius: 8px 8px 0 0;
+    transform-origin: top;
+    transition: transform 0.6s ease;
+    z-index: 3;
+}
+
+.envelope-badge {
+    font-size: 2rem;
+    z-index: 4;
+    transition: transform 0.5s ease;
+}
+
+.envelope-box:hover .envelope-badge {
+    transform: scale(1.2);
+}
+
+.envelope-hint {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin-top: 15px;
+    letter-spacing: 1px;
+    z-index: 4;
+}
+
+/* Animasi Buka Amplop */
+.envelope-box.open-envelope {
+    transform: translateY(100px) rotateX(-20deg);
+    opacity: 0;
+    pointer-events: none;
+    transition: all 1s ease;
+}
+
+/* Desain Surat Kertas Putih (Glassmorphism Tipis) */
+.letter-box {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    border-radius: 16px;
+    padding: 35px 30px;
+    box-shadow: 0 20px 50px rgba(74, 62, 77, 0.08);
+    transition: all 1.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.letter-content {
+    font-family: 'Quicksand', sans-serif;
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: var(--text-dark);
+    text-align: justify;
+    min-height: 120px;
+}
+
+.letter-footer {
+    margin-top: 35px;
+    text-align: center;
+    transition: opacity 1.5s ease;
+}
+
+.footer-text {
+    font-family: 'Quicksand', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #E07A9B;
+    letter-spacing: 1px;
+}
+
+/* ================= KEYFRAMES ANIMATIONS ================= */
+@keyframes floatingText {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+}
+
+@keyframes pulseHeart {
+    0%, 100% { transform: scale(1); box-shadow: 0 8px 20px var(--shadow-soft); }
+    50% { transform: scale(1.03); box-shadow: 0 8px 25px rgba(255, 193, 214, 0.5); }
+}
+
+@keyframes dramaticScale {
+    0%, 100% { transform: scale(1) translateY(0); }
+    50% { transform: scale(1.04) translateY(-5px); filter: drop-shadow(0 5px 15px rgba(255,255,255,0.6)); }
+}
+
+/* ================= RESPONSIVE DESIGN ================= */
+@media (max-width: 600px) {
+    .question-text { font-size: 1.9rem; }
+    .lyric-huge { font-size: 1.8rem; }
+    .lyric-dramatic { font-size: 2.1rem; }
+    .letter-box { padding: 25px 20px; }
+    .letter-content { font-size: 1rem; }
+    .envelope-box { width: 250px; height: 160px; }
+    .envelope-flap { border-left: 125px solid transparent; border-right: 125px solid transparent; border-top: 80px solid var(--pink-pastel); }
+}

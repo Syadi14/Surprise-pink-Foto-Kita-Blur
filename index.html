@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Untukmu ❤️</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <canvas id="particleCanvas"></canvas>
+
+    <audio id="bgMusic" src="music.mp3" preload="auto"></audio>
+
+    <section id="page-one" class="active">
+        <div class="intro-container">
+            <h1 class="question-text">Apakah aku cantik?</h1>
+            <button id="startBtn" class="btn-primary">Iya ❤️</button>
+        </div>
+    </section>
+
+    <section id="page-two" class="hidden">
+        <div class="lyrics-container">
+            <p id="lyric-1" class="lyric-text lyric-small">Tanpa banyak tanda tanya...</p>
+            
+            <div id="lyric-2" class="lyric-text lyric-huge hidden-element">
+                Memilih nama panggilan mesra<br>
+                <span class="highlight-pink">kamu blueberry</span> dan <span class="highlight-cream">aku pastry</span>
+            </div>
+
+            <div id="lyric-3" class="lyric-text lyric-dramatic hidden-element">
+                Nama depanmu nama belakangku<br>
+                jadi nama toko roti
+            </div>
+        </div>
+    </section>
+
+    <section id="page-three" class="hidden">
+        <div class="envelope-wrapper">
+            <div id="envelope" class="envelope-box">
+                <div class="envelope-flap"></div>
+                <div class="envelope-paper-preview"></div>
+                <div class="envelope-badge">❤️</div>
+                <p class="envelope-hint">Klik untuk membuka</p>
+            </div>
+
+            <div id="letter" class="letter-box hidden-element">
+                <div class="letter-content">
+                    <p id="typewriter-text"></p>
+                </div>
+                <div id="letter-footer" class="letter-footer hidden-element">
+                    <p class="footer-text">❤️ Terima kasih sudah membuka surat ini ❤️</p>
+                    <div class="sparkle-effect"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="script.js"></script>
+</body>
+</html>
